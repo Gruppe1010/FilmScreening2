@@ -5,11 +5,13 @@ import com.example.demo.model.User;
 import com.example.demo.repository.AuthorityRepository;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 
+@Slf4j
 @RequiredArgsConstructor
 @Component
 public class InitUsers implements CommandLineRunner {
@@ -25,6 +27,8 @@ public class InitUsers implements CommandLineRunner {
     private final PasswordEncoder passwordEncoder;
 
     private void loadSecurityData() {
+
+        log.debug("Vi danner brugere");
 
         Authority admin = authorityRepository.save(Authority.builder().role("ROLE_ADMIN").build());
         Authority user = authorityRepository.save(Authority.builder().role("ROLE_USER").build());

@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -17,6 +18,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Bean
     PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+
+        //return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 
@@ -27,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 authorizeRequests()
                 .antMatchers("/", "/webjars/**", "/resources/**").permitAll()
                 .antMatchers("/films").permitAll()
+                .mvcMatchers("/sog").hasRole("ADMIN")
                 .mvcMatchers(HttpMethod.GET, "/api/films").permitAll()
                 .anyRequest()
                 .authenticated()
