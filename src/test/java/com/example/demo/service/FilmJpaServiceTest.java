@@ -30,11 +30,12 @@ class FilmJpaServiceTest {
     @Test
     void findByIdBDD() {
 
-        given(filmRepository.findById(1)).willReturn(Optional.of(film));
+        given(filmRepository.findById(1)).
+                willReturn(Optional.of(film));
+
         Film foundFilm = filmJpaService.findById(1);
         assertNotEquals(null, foundFilm);
         verify(filmRepository).findById(1);
-
     }
 
     @Test
@@ -42,6 +43,7 @@ class FilmJpaServiceTest {
 
         when(filmRepository.findById(1)).
                 thenReturn(Optional.of(film));
+
         Film foundFilm = filmJpaService.findById(1);
         assertNotEquals(null, foundFilm);
         verify(filmRepository).findById(1);
