@@ -20,4 +20,7 @@ public class InlineMockTest {
         assertEquals("Viggo", mapMock.get("Hej"));
 
     }
+
+
+
 }
