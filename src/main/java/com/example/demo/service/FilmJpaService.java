@@ -3,6 +3,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Film;
 import com.example.demo.repository.FilmRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -10,11 +11,8 @@ import java.util.Set;
 @Service
 public class FilmJpaService implements FilmService {
 
+    @Autowired
     FilmRepository filmRepository;
-
-    public FilmJpaService(FilmRepository filmRepository) {
-        this.filmRepository = filmRepository;
-    }
 
 
     @Override
