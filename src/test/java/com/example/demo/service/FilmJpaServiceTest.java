@@ -12,6 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,7 +27,15 @@ class FilmJpaServiceTest {
     @InjectMocks
     FilmJpaService filmJpaService;
 
+    @Test
+    void findByIdBDD() {
 
+        given(filmRepository.findById(1)).willReturn(Optional.of(film));
+        Film foundFilm = filmJpaService.findById(1);
+        assertNotEquals(null, foundFilm);
+        verify(filmRepository).findById(1);
+
+    }
 
     @Test
     void findById() {
@@ -50,9 +59,9 @@ class FilmJpaServiceTest {
     @Test
     void deleteById() {
         filmJpaService.deleteById(2);
-        filmJpaService.deleteById(2);
+        filmJpaService.deleteById(3);
 
-        verify(filmRepository, times(2)).deleteById(2);
+        verify(filmRepository, times(2)).deleteById(anyInt());
     }
 
     @Test
