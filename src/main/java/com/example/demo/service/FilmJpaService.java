@@ -3,9 +3,11 @@ package com.example.demo.service;
 
 import com.example.demo.model.Film;
 import com.example.demo.repository.FilmRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.Set;
 
+@Service
 public class FilmJpaService implements FilmService {
 
     FilmRepository filmRepository;
@@ -20,8 +22,8 @@ public class FilmJpaService implements FilmService {
     }
 
     @Override
-    public Film findById(Integer integer) {
-        return null;
+    public Film findById(Integer id) {
+        return filmRepository.findById(id).orElse(null);
     }
 
     @Override
