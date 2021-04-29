@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 authorizeRequests()
                 .antMatchers("/", "/webjars/**", "/resources/**").permitAll()
                 .antMatchers("/films").permitAll()
-                .mvcMatchers("/sog").hasRole("ADMIN")
+                .mvcMatchers("/sog").hasRole("A DMIN")
                 .mvcMatchers(HttpMethod.GET, "/api/films").permitAll()
                 .anyRequest()
                 .authenticated()

@@ -3,6 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.model.Film;
 import com.example.demo.repository.FilmRepository;
 import com.example.demo.repository.ScreeningRepository;
+import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,12 +14,17 @@ import java.util.List;
 @Controller
 public class FilmController {
 
+    @Autowired
     FilmRepository filmRepository;
+    @Autowired
     ScreeningRepository screeningRepository;
+    @Autowired
+    UserRepository userRepository;
 
-    public FilmController(FilmRepository filmRepository, ScreeningRepository screeningRepository) {
+    public FilmController(FilmRepository filmRepository, ScreeningRepository screeningRepository, UserRepository userRepository) {
         this.filmRepository = filmRepository;
         this.screeningRepository = screeningRepository;
+        this.userRepository = userRepository;
     }
 
     @RequestMapping("/")
