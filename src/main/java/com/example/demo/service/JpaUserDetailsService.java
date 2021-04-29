@@ -5,6 +5,7 @@ import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -22,7 +24,7 @@ import java.util.stream.Collectors;
 @Service
 public class JpaUserDetailsService implements UserDetailsService {
 
-    //@Autowired
+    @Autowired
     private UserRepository userRepository;
 
     @Transactional
@@ -35,19 +37,18 @@ public class JpaUserDetailsService implements UserDetailsService {
         });
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked()
+                user.isEnabled(), user.isAccountNonExpired(), user.isCredentialsNonExpired(), user.isAccountNonLocked(),
         convertToSpringAuthorities(user.getAuthorities()));
-        return null;
-
     }
 
-    private Collection<? extends GrantedAuthority> convertToSpringAuthorities(Set<Authority> authorities){
-        if(authorities != null && authorities.size() > 0) {
+    private Collection<? extends GrantedAuthority> convertToSpringAuthorities(Set<Authority> authorities) {
+        if (authorities != null && authorities.size() > 0) {
             return authorities.stream()
                     .map(Authority::getRole)
                     .map(SimpleGrantedAuthority::new)
                     .collect(Collectors.toSet());
-
+        } else {
+            return new HashSet<>();
         }
     }
 
