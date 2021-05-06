@@ -28,6 +28,25 @@ public class FilmRestController {
     public List<Film> findAllfilms() {
         return filmRepository.findAll();
     }
+    
+    
+    
+    
+    
+    
+    
+    @GetMapping("/filmsxx")
+    public List<Film> findAllfilmsxx() {
+        int i1 = 100;
+        int i2 = 0;
+        int i3 = i1/i2;
+        return filmRepository.findAll();
+    }
+    
+    @GetMapping("/filmsyy")
+    public List<Film> findAllfilmsyy() {
+        return filmRepository.findAll();
+    }
 
     @GetMapping("/film/{id}")
     public ResponseEntity<Film> findFilmById(@PathVariable Integer id) {

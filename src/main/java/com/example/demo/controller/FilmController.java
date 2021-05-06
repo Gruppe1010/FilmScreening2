@@ -21,12 +21,6 @@ public class FilmController {
     @Autowired
     UserRepository userRepository;
 
-    public FilmController(FilmRepository filmRepository, ScreeningRepository screeningRepository, UserRepository userRepository) {
-        this.filmRepository = filmRepository;
-        this.screeningRepository = screeningRepository;
-        this.userRepository = userRepository;
-    }
-
     @RequestMapping("/")
     public String getIndex(Model model) {
         model.addAttribute("film", filmRepository.findAll());
